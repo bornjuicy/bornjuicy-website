@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Born Juicy · Fresh drinks, Geylang Bahru</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Cold-pressed juices and fresh-canned fruit teas from Geylang Bahru, Singapore. Open daily 12:30pm–10:30pm. Gift boxes, event drinks and office pantry. WhatsApp +65 9679 1309.">
+<meta name="theme-color" content="#FBF5E6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='36' r='22' fill='%23E8445A'/%3E%3Cpath d='M32 14c2-6 8-9 14-8-1 6-6 10-14 8z' fill='%2366A83A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/v-orange-bottle.jpg">
+<!--
+  Born Juicy website v3 · photo-first scroll story.
+  Libraries (free, pinned): GSAP 3.12.5 + ScrollTrigger (no-charge licence) · Lenis 1.1.13 (MIT, desktop only).
+  Every photo and video loop is real Born Juicy footage (our Instagram reels and product shots). No AI images, no people.
+  Sharpness: photos are 1260px+ (lanczos + light unsharp); videos are 720p H.264; nothing is scaled up as a bitmap.
+  Motion: transform + opacity only, scrubbed to scroll. Reduced-motion, ?flat or no-JS = the same page, still.
+-->
+<style>
+:root{
+  --cream:#FBF5E6;--paper:#FFFDF8;--ink:#24213A;--ink-2:#4A4660;--muted:#6B6679;--line:rgba(36,33,58,.12);
+  --melon:#E8445A;--melon-d:#C2283F;--mango:#FFB627;--lime:#7DBB3C;--wa:#1D8F4E;--wa-d:#157540;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Outfit",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --pad:20px;--hdr:64px;--r:28px;--ease:cubic-bezier(.22,1,.36,1);
+  color-scheme:light;
+}
+@media (min-width:768px){:root{--pad:40px;--hdr:76px}}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:var(--hdr)}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--cream)}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:600;line-height:1.02;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+em{font-style:italic;font-weight:500}
+.wrap{width:100%;max-width:1240px;margin:0 auto;padding-left:max(var(--pad),env(safe-area-inset-left,0px));padding-right:max(var(--pad),env(safe-area-inset-right,0px))}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px}
+.skip:focus{top:12px}
+:focus-visible{outline:3px solid var(--melon);outline-offset:3px;border-radius:8px}
+svg.i{width:1.15em;height:1.15em;flex:none;fill:currentColor}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--melon-d)}
+.lead{font-size:18px;color:var(--ink-2);max-width:34em}
+@media (min-width:900px){.lead{font-size:20px}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:50px;padding:0 24px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;border:0;cursor:pointer;transition:transform .35s var(--ease),background-color .25s,box-shadow .35s var(--ease);white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn.wa{background:var(--wa);color:#fff;box-shadow:0 10px 24px -12px rgba(21,117,64,.7)}
+.btn.wa:hover{background:var(--wa-d)}
+.btn.ink{background:var(--ink);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.light{background:#fff;color:var(--ink)}
+.btn.on-dark{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)}
+.btn.on-dark:hover{box-shadow:inset 0 0 0 1.5px #fff}
+.btn.sm{min-height:42px;padding:0 18px;font-size:15px}
+
+/* header */
+.hdr{position:fixed;inset:0 0 auto 0;z-index:30;padding-top:env(safe-area-inset-top,0px);transition:transform .5s var(--ease),background-color .35s,box-shadow .35s}
+.hdr .wrap{height:var(--hdr);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.hdr.solid{background:rgba(251,245,230,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 1px 0 var(--line)}
+.hdr.hide{transform:translateY(-100%)}
+.brand{display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1}
+.brand .wm{font-weight:700;letter-spacing:.14em;font-size:19px;display:flex;align-items:center}
+.brand .wm svg{width:.95em;height:.95em;margin:0 .03em;color:var(--melon)}
+.brand .tag{font-size:10px;letter-spacing:.06em;margin-top:3px;opacity:.7}
+.nav{display:none;gap:30px;font-weight:500;font-size:15px}
+.nav a{text-decoration:none;position:relative}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.nav a:hover::after{transform:scaleX(1)}
+@media (min-width:900px){.nav{display:flex}}
+
+/* mobile order bar */
+.obar{position:fixed;left:0;right:0;bottom:0;z-index:29;display:flex;gap:10px;padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));background:rgba(251,245,230,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 -1px 0 var(--line);transform:translateY(110%);transition:transform .55s var(--ease)}
+.obar .btn{flex:1;min-height:48px;padding:0 12px}
+html.past-hero .obar{transform:none}
+@media (min-width:900px){.obar{display:none}}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;overflow:clip}
+.hero-pin{position:relative;height:100vh;height:100svh;overflow:visible;display:flex;flex-direction:column;padding-top:calc(var(--hdr) + env(safe-area-inset-top,0px))}
+.hero-bd{position:absolute;inset:0;opacity:0;pointer-events:none;background:radial-gradient(70% 60% at 50% 45%,#FFD8B0 0%,#FFE9D2 45%,var(--cream) 100%)}
+.hero-copy{position:relative;z-index:2;padding-top:12px}
+.hero-copy .eyebrow{display:flex;align-items:center;gap:8px;color:var(--ink-2);letter-spacing:.08em}
+.live{width:9px;height:9px;border-radius:50%;background:#9aa0a6;flex:none}
+.live.on{background:#2DB46A;box-shadow:0 0 0 0 rgba(45,180,106,.5);animation:ping 2.4s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 9px rgba(45,180,106,0)}100%{box-shadow:0 0 0 0 rgba(45,180,106,0)}}
+.hero h1{font-size:clamp(42px,11.5vw,104px);margin:14px 0 14px}
+.hero h1 em{color:var(--melon)}
+.hero .lead{font-size:17px}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.facts{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:18px;font-size:14px;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+.hero-stage{position:relative;z-index:1;flex:1;min-height:0;margin:18px 0 22px}
+.deal{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.card{margin:0;height:100%;max-height:520px;aspect-ratio:4/5;max-width:64vw;border-radius:var(--r);overflow:hidden;background:#eee;box-shadow:0 30px 60px -28px rgba(36,33,58,.45),0 2px 6px rgba(36,33,58,.08);pointer-events:auto}
+.card img,.card video,.m-ph video,.v-media video{width:100%;height:100%;object-fit:cover;display:block}
+.card.c2,.card.c3{height:80%}
+.card.big{position:absolute;z-index:2;max-width:none;max-height:none;aspect-ratio:auto;transform-origin:50% 50%}
+.hero-cap{position:absolute;z-index:3;left:0;right:0;bottom:calc(22px + env(safe-area-inset-bottom,0px));text-align:center;color:var(--ink);opacity:0;pointer-events:none}
+.hero-cap .k{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--melon-d)}
+.hero-cap .t{font-family:var(--display);font-size:clamp(22px,4vw,34px);margin-top:4px}
+.scrollhint{position:absolute;z-index:3;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:none}
+@media (min-width:900px){
+  .hero-pin{flex-direction:row;align-items:center;gap:40px}
+  .hero-copy{flex:1.05;padding-top:0}
+  .hero-stage{flex:.95;align-self:stretch;margin:40px 0 50px}
+  .card{max-width:none}
+  .scrollhint{display:block}
+}
+@media (max-width:899px){
+  .hero .lead{display:none}
+  .hero h1{font-size:clamp(40px,12vw,64px)}
+  .hero-copy .facts{display:none}
+}
+@media (max-width:899px) and (min-height:760px){.hero .lead{display:block}}
+
+/* ---------- MADE FRESH ---------- */
+.made{position:relative;background:var(--paper)}
+.made-pin{height:100vh;height:100svh;display:flex;flex-direction:column;padding-top:calc(var(--hdr) + 10px);padding-bottom:24px;gap:18px}
+.made-media{position:relative;flex:1;min-height:0;border-radius:var(--r);overflow:hidden;background:#ddd}
+.m-ph{position:absolute;inset:0;margin:0;overflow:hidden}
+.m-ph img{width:100%;height:100%;object-fit:cover}
+.m-ph figcaption{position:absolute;left:14px;bottom:14px;background:rgba(255,253,248,.9);color:var(--ink);font-size:12px;font-weight:600;letter-spacing:.06em;padding:6px 11px;border-radius:999px}
+.m-count{position:absolute;right:14px;top:14px;z-index:5;background:rgba(36,33,58,.72);color:#fff;font-size:12px;font-weight:600;letter-spacing:.1em;padding:6px 11px;border-radius:999px;font-variant-numeric:tabular-nums}
+.made-copy .eyebrow{margin-bottom:12px}
+.steps{position:relative}
+.steps li{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:baseline}
+.steps .n{font-size:13px;font-weight:600;color:var(--melon-d);font-variant-numeric:tabular-nums}
+.steps h3{font-size:clamp(34px,8vw,64px)}
+.steps p{grid-column:2;color:var(--ink-2);margin-top:6px;max-width:26em}
+@media (max-width:899px){
+  .made-pin{height:auto;min-height:0}
+  html.mo .made-pin{height:100svh;padding-bottom:calc(86px + env(safe-area-inset-bottom,0px))}
+  html.mo .steps{height:132px}
+  .steps h3{font-size:clamp(32px,9vw,44px)}
+  .steps p{font-size:15px;line-height:1.45}
+  html.mo .steps li{position:absolute;inset:0}
+  html:not(.mo) .made-media{flex:none;aspect-ratio:4/3}
+  html:not(.mo) .steps{display:grid;gap:22px}
+}
+@media (min-width:900px){
+  .made-pin{flex-direction:row;align-items:center;gap:56px;padding-bottom:40px}
+  .made-media{flex:1.15;align-self:stretch}
+  .made-copy{flex:.85}
+  .steps{display:grid;gap:30px}
+}
+html:not(.mo) .m-ph:not(:first-child){display:none}
+
+/* ---------- DRINKS ---------- */
+.drinks{position:relative;padding:90px 0 40px}
+.sec-head{display:grid;gap:14px;margin-bottom:28px}
+.sec-head h2{font-size:clamp(40px,8vw,84px)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chips a{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 15px;border-radius:999px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);text-decoration:none;font-size:15px;font-weight:500;transition:background-color .3s,box-shadow .3s}
+.chips a:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.chips i{width:10px;height:10px;border-radius:50%;background:var(--c)}
+.stack{display:grid;grid-template-columns:minmax(0,1fr);gap:5vh}
+.dcard{min-width:0}
+.dcard{position:sticky;top:calc(var(--hdr) + env(safe-area-inset-top,0px) + 10px);height:calc(100svh - var(--hdr) - env(safe-area-inset-top,0px) - 96px);max-height:620px;min-height:440px}
+.dc{position:relative;height:100%;border-radius:var(--r);background:var(--tint);overflow:hidden;display:flex;flex-direction:column;transform-origin:50% 0;box-shadow:0 30px 60px -36px rgba(36,33,58,.5)}
+.dc .veil{position:absolute;inset:0;background:var(--ink);opacity:0;pointer-events:none;z-index:4}
+.dc-ph{position:relative;flex:1;min-height:0;margin:0;overflow:hidden}
+.dc-ph img{position:absolute;left:0;top:-4%;width:100%;height:108%;object-fit:cover}
+.dc-ph.duo{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.dc-ph.duo>div{position:relative;overflow:hidden}
+.dc-copy{padding:18px 20px 20px;display:grid;gap:8px}
+.dc-copy .tag{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--deep)}
+.dc-copy h3{font-size:clamp(30px,6vw,56px)}
+.dc-copy p.d{color:var(--ink-2);max-width:30em}
+.dc-copy .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.dc-copy .row .btn{min-height:44px;padding:0 18px;font-size:15px}
+.dc-copy .note{font-size:13px;color:var(--muted)}
+@media (max-width:899px){.dc-copy p.d{font-size:15px;line-height:1.45}.dc-copy .note{display:none}}
+@media (min-width:900px){
+  .dc{flex-direction:row}
+  .dc-ph{flex:none;height:100%;aspect-ratio:4/5}
+  .dc-ph.duo{aspect-ratio:auto;width:min(56%,760px)}
+  .dc-copy{flex:1;align-content:center;padding:40px 52px;gap:14px}
+  .dc-copy .row .btn{min-height:50px;padding:0 24px;font-size:16px}
+  .dc-copy p.d{font-size:19px}
+  .dc-copy .idx{position:absolute;right:40px;top:34px;font-size:13px;font-weight:600;letter-spacing:.12em;color:var(--deep);opacity:.8;font-variant-numeric:tabular-nums}
+}
+.dc-copy .idx{display:none}
+@media (min-width:900px){.dc-copy .idx{display:block}}
+.stack-end{height:8vh}
+
+
+/* ---------- GIFTS & EVENTS ---------- */
+.gifts{padding:40px 0 100px}
+.g-grid{display:grid;gap:30px;align-items:center}
+.g-ph{margin:0;position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;background:#eee;}
+.g-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 60%;}
+.g-ph figcaption{position:absolute;left:14px;right:14px;bottom:14px;font-size:12px;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.g-copy{display:grid;gap:16px}
+.g-copy h2{font-size:clamp(36px,6.4vw,68px)}
+.tiers{display:grid;gap:10px;margin-top:6px}
+.tiers li{display:grid;grid-template-columns:auto 1fr;gap:2px 16px;align-items:baseline;padding:16px 18px;border-radius:18px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
+.tiers li.pop{box-shadow:inset 0 0 0 2px var(--melon)}
+.tiers .p{grid-row:span 2;font-family:var(--display);font-size:30px;font-weight:600;line-height:1}
+.tiers .p small{display:block;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.tiers b{font-weight:600}
+.tiers span{font-size:14px;color:var(--muted)}
+.fine{font-size:13px;color:var(--muted)}
+.dates{display:flex;flex-wrap:wrap;gap:8px}
+.dates span{font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;background:#FFE4E7;color:var(--melon-d)}
+@media (min-width:900px){.g-grid{grid-template-columns:1fr 1.05fr;gap:72px}}
+.svc{display:grid;gap:16px;margin-top:70px}
+.svc article{border-radius:var(--r);padding:28px;background:var(--ink);color:#fff;display:grid;gap:12px;align-content:start}
+.svc article:nth-child(2){background:#2E5B2A}
+.svc .k{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.svc h3{font-size:clamp(30px,4vw,44px)}
+.svc p{opacity:.88}
+.svc ul{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
+.svc ul li{font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12)}
+.svc .btn{justify-self:start}
+.how{display:grid;gap:12px;margin-top:16px;counter-reset:s}
+.how li{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:18px 20px;border-radius:18px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
+.how li::before{counter-increment:s;content:"0" counter(s);grid-row:span 2;font-family:var(--display);font-size:28px;color:var(--melon);line-height:1}
+.how b{font-weight:600}
+.how span{color:var(--ink-2);font-size:15px}
+@media (min-width:900px){.svc{grid-template-columns:1fr 1fr}.how{grid-template-columns:repeat(4,1fr)}.how li{grid-template-columns:1fr}.how li::before{grid-row:auto}}
+
+/* ---------- VISIT ---------- */
+.visit{background:var(--ink);color:#fff;padding:100px 0 60px;position:relative;overflow:hidden}
+.visit .eyebrow{color:#FF9AA8}
+.visit h2{font-size:clamp(44px,9vw,110px);margin:14px 0 36px}
+.visit h2 em{color:#FF9AA8}
+.v-wrap{display:grid;gap:22px;align-items:start}
+.v-media img{width:100%;height:100%;object-fit:cover;display:block}
+.v-media{margin:0;position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;background:#3a3550}
+.v-media figcaption{position:absolute;left:12px;bottom:12px;background:rgba(36,33,58,.72);color:#fff;font-size:12px;font-weight:600;letter-spacing:.06em;padding:6px 11px;border-radius:999px}
+@media (min-width:900px){.v-wrap{grid-template-columns:minmax(0,380px) 1fr;gap:40px}.v-wrap .vgrid{grid-template-columns:1fr 1fr}}
+.vgrid{display:grid;gap:1px;background:rgba(255,255,255,.14);border-radius:22px;overflow:hidden}
+.vgrid>div{background:var(--ink);padding:20px 22px;display:grid;gap:4px}
+.vgrid .k{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.6}
+.vgrid .v{font-size:19px;font-weight:500}
+.vgrid .v a{text-decoration-color:rgba(255,255,255,.35);text-underline-offset:4px}
+.vgrid small{opacity:.65;font-size:14px}
+
+.visit .ctas{margin-top:26px}
+.family{margin-top:40px;font-size:15px;opacity:.75;max-width:40em}
+.faq{margin-top:70px;display:grid;gap:10px}
+.faq h3{font-size:30px;margin-bottom:8px}
+.faq details{border-radius:16px;background:rgba(255,255,255,.06);padding:0 20px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:600;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:22px;line-height:1;opacity:.7;transition:transform .35s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 18px;opacity:.82;max-width:44em}
+footer{background:var(--ink);color:rgba(255,255,255,.7);font-size:14px;padding:30px 0 calc(30px + env(safe-area-inset-bottom,0px))}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;border-top:1px solid rgba(255,255,255,.12);padding-top:26px}
+footer a{color:#fff}
+@media (max-width:899px){footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}}
+
+/* reveal (only when motion is on) */
+html.mo [data-rv]{opacity:0;transform:translateY(28px)}
+@media (prefers-reduced-motion:reduce){html.mo [data-rv]{opacity:1;transform:none}}
+.m-ph img,.m-ph video{position:absolute;left:0;top:-3%;width:100%;height:110%;object-fit:cover}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></symbol>
+  <symbol id="i-apple" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.2c-1.6-1.1-5.8-1.6-7.3 2.2-1.4 3.6.6 8.4 3.3 10.3 1.4 1 2.5.6 4 .2 1.5.4 2.6.8 4-.2 2.7-1.9 4.7-6.7 3.3-10.3-1.5-3.8-5.7-3.3-7.3-2.2z"/><path d="M12 7c0-2 .8-3.6 2.6-4.4"/></g></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M7 7V6a5 5 0 0 1 10 0v1h3l-1 15H5L4 7h3zm2 0h6V6a3 3 0 0 0-6 0v1z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></symbol>
+</svg>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Born Juicy, back to top"><span class="wm" aria-hidden="true">B<svg><use href="#i-apple"/></svg>RN&nbsp;JUICY</span><span class="tag" aria-hidden="true">always tasty</span></a>
+    <nav class="nav" aria-label="Main"><a href="#drinks">Menu</a><a href="#made">How it's made</a><a href="#gifts">Gifts &amp; events</a><a href="#visit">Visit</a></nav>
+    <a class="btn wa sm" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+  </div>
+</header>
+
+<main id="main">
+<!-- 1 · HERO: the real can photo deals in, then grows to centre stage as you scroll -->
+<section class="hero" id="top" aria-label="Born Juicy">
+  <div class="hero-bd" id="heroBd" aria-hidden="true"></div>
+  <div class="hero-pin wrap" id="heroPin">
+    <div class="hero-copy" id="heroCopy">
+      <p class="eyebrow"><span class="live" id="live"></span><span id="liveTxt">Open daily 12:30pm–10:30pm</span> · Geylang Bahru</p>
+      <h1>Fresh drinks,<br><em>made to be shared.</em></h1>
+      <p class="lead">Cold-pressed juices and fresh-canned fruit teas, made in our Geylang Bahru kitchen. Pick one up, get it on GrabFood, or let us bring them to your office and events.</p>
+      <div class="ctas">
+        <a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order on WhatsApp</a>
+        <a class="btn ink" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg>Order on Grab</a>
+        <a class="btn ghost" href="#drinks">See the menu</a>
+      </div>
+      <ul class="facts"><li><b>12:30–10:30pm</b> every day</li><li><b>GrabFood</b> delivery</li><li><b>Gift boxes</b> from S$38</li></ul>
+    </div>
+    <div class="hero-stage" id="heroStage">
+      <div class="deal"><figure class="card c2"><img src="assets/s-oolong.jpg" alt="Oolong Zest tea with lime, freshly poured" width="704" height="1088"></figure></div>
+      <div class="deal"><figure class="card c3"><img src="assets/bj-fruit-infused.jpg" alt="Clear Born Juicy cans of fruit tea with real fruit inside" width="700" height="700"></figure></div>
+      <div class="deal"><figure class="card c1" id="heroFrame"><video data-v src="assets/v-orange-bottle.mp4" poster="assets/v-orange-bottle.jpg" muted playsinline loop autoplay preload="auto" aria-label="A bottle of Born Juicy orange juice among fresh-cut oranges"></video></figure></div>
+    </div>
+    <div class="hero-cap" id="heroCap" aria-hidden="true"><p class="k">Cold-pressed · bottled</p><p class="t">Pressed from whole fruit, every day.</p></div>
+    <p class="scrollhint" id="hint">Scroll</p>
+  </div>
+</section>
+
+<!-- 2 · MADE FRESH: three real photos wipe in, one per step -->
+<section class="made" id="made" aria-labelledby="made-h">
+  <div class="made-pin wrap" id="madePin">
+    <div class="made-media">
+      <figure class="m-ph"><video data-v src="assets/v-green-pour.mp4" poster="assets/v-green-pour.jpg" muted playsinline loop preload="none" aria-label="Fresh green juice pouring into a Born Juicy bottle"></video><figcaption>Green apple, cucumber &amp; celery, just pressed</figcaption></figure>
+      <figure class="m-ph"><video data-v src="assets/v-orange-pour.mp4" poster="assets/v-orange-pour.jpg" muted playsinline loop preload="none" aria-label="Orange juice pouring over ice beside fresh oranges"></video><figcaption>Poured to order</figcaption></figure>
+      <figure class="m-ph"><video data-v src="assets/v-fridge.mp4" poster="assets/v-fridge.jpg" muted playsinline loop preload="none" aria-label="Our fridge of clear Born Juicy cans: cold brew teas and fruit teas"></video><figcaption>Our fridge: cold brews &amp; fruit teas</figcaption></figure>
+      <span class="m-count" id="mCount" aria-hidden="true">01 / 03</span>
+    </div>
+    <div class="made-copy">
+      <p class="eyebrow" id="made-h">Made fresh, every day</p>
+      <ol class="steps" id="steps">
+        <li><span class="n">01</span><h3>Pressed.</h3><p>Juices pressed from whole fruit and vegetables, in our Geylang Bahru kitchen.</p></li>
+        <li><span class="n">02</span><h3>Poured.</h3><p>Fruit teas infused with real fruit, steeped fresh.</p></li>
+        <li><span class="n">03</span><h3>Canned.</h3><p>Sealed in our own clear cans, every day. You can see exactly what's inside.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · MENU: big photo cards that stack as you scroll -->
+<section class="drinks" id="drinks" aria-labelledby="drinks-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow" data-rv>The menu</p>
+      <h2 id="drinks-h" data-rv>Signature drinks.</h2>
+      <p class="lead" data-rv>Fruit teas in our clear cans, cold-pressed juices and fresh bites. The fruit-tea fridge changes with what's in season.</p>
+      <nav class="chips" aria-label="Jump to a drink" data-rv>
+        <a href="#d-watermelon" style="--c:#E8445A"><i></i>Watermelon</a>
+        <a href="#d-longan" style="--c:#DDAA48"><i></i>Longan</a>
+        <a href="#d-green" style="--c:#7DB33A"><i></i>Green apple</a>
+        <a href="#d-orange" style="--c:#EE7417"><i></i>Orange &amp; carrot</a>
+        <a href="#d-pine" style="--c:#F2A21E"><i></i>Pineapple &amp; carrot</a>
+        <a href="#d-bites" style="--c:#8E6BB8"><i></i>Bites</a>
+      </nav>
+    </header>
+    <div class="stack" id="stack">
+      <article class="dcard" id="d-watermelon" style="--tint:#FFE4E7;--deep:#C2283F"><div class="dc"><figure class="dc-ph"><img src="assets/bj-watermelon.jpg" alt="Watermelon fruit tea in a clear Born Juicy can" loading="lazy" decoding="async"></figure><div class="dc-copy"><span class="idx">01 / 06</span><p class="tag">Fruit tea · can</p><h3>Watermelon</h3><p class="d">Chunks of fresh watermelon, steeped and sealed in the can. Our summer-every-day drink.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Watermelon%20fruit%20tea." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
+      <article class="dcard" id="d-longan" style="--tint:#FFF2D2;--deep:#9A6A12"><div class="dc"><figure class="dc-ph"><img src="assets/bj-longan.jpg" alt="Longan fruit tea in a clear Born Juicy can with fresh longans" loading="lazy" decoding="async"></figure><div class="dc-copy"><span class="idx">02 / 06</span><p class="tag">Fruit tea · can</p><h3>Longan</h3><p class="d">Whole longans in a light, golden tea. Served ice-cold.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Longan%20fruit%20tea." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
+      <article class="dcard" id="d-green" style="--tint:#ECF5DD;--deep:#3F7A1E"><div class="dc"><figure class="dc-ph"><img src="assets/bj-green-apple.jpg" alt="Green juice in a Born Juicy cup with celery, green apple and cucumber" loading="lazy" decoding="async"></figure><div class="dc-copy"><span class="idx">03 / 06</span><p class="tag">Cold-pressed</p><h3>Green apple, cucumber &amp; celery</h3><p class="d">Crisp, clean and properly green.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Green%20apple%2C%20cucumber%20%26%20celery%20juice." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
+      <article class="dcard" id="d-orange" style="--tint:#FFE7D3;--deep:#B5520A"><div class="dc"><figure class="dc-ph"><img src="assets/bj-orange-carrot.jpg" alt="Orange carrot juice in a Born Juicy cup with a whole orange, carrot and mint" loading="lazy" decoding="async"></figure><div class="dc-copy"><span class="idx">04 / 06</span><p class="tag">Cold-pressed</p><h3>Orange &amp; carrot</h3><p class="d">Sweet carrot, bright orange, a sprig of mint.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Orange%20%26%20carrot%20juice." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
+      <article class="dcard" id="d-pine" style="--tint:#FFF3C4;--deep:#A36A05"><div class="dc"><figure class="dc-ph"><img src="assets/bj-pineapple.jpg" alt="Pineapple carrot juice in a Born Juicy cup with a pineapple ring" loading="lazy" decoding="async"></figure><div class="dc-copy"><span class="idx">05 / 06</span><p class="tag">Cold-pressed</p><h3>Pineapple &amp; carrot</h3><p class="d">Tropical and tangy, with a little celery for balance.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Pineapple%20%26%20carrot%20juice." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
+      <article class="dcard" id="d-bites" style="--tint:#EFE8F6;--deep:#5E3F86"><div class="dc"><figure class="dc-ph duo"><div><img src="assets/bj-chia.jpg" alt="Chia pudding with fresh berries" loading="lazy" decoding="async"></div><div><img src="assets/bj-sando.jpg" alt="Fruit sandos with strawberry and kiwi" loading="lazy" decoding="async"></div></figure><div class="dc-copy"><span class="idx">06 / 06</span><p class="tag">Bites</p><h3>Chia puddings &amp; fruit sandos</h3><p class="d">Overnight chia with fresh fruit, and soft white bread with light cream and whole fresh fruit. Something to eat with your drink.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20What%20bites%20do%20you%20have%20today%3F" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Ask what's in today</a></div></div><span class="veil"></span></div></article>
+    </div>
+    <div class="stack-end"></div>
+  </div>
+</section>
+
+<!-- 4 · GIFTS & EVENTS: the business side, with real prices -->
+<section class="gifts" id="gifts" aria-labelledby="gifts-h">
+  <div class="wrap">
+    <div class="g-grid">
+      <figure class="g-ph" id="gPh"><img src="assets/fc-gift.jpg" alt="A preserved-flower bouquet made by our sister florist Floral Charm" loading="lazy" decoding="async"><figcaption>Photo shows our recent work, for style and finish. CNY editions are made in red and gold.</figcaption></figure>
+      <div class="g-copy">
+        <p class="eyebrow" data-rv>Gift boxes · CNY 2027</p>
+        <h2 id="gifts-h" data-rv>Gifts your clients will keep on their desk.</h2>
+        <p class="lead" data-rv>Handmade soap and preserved-flower gift boxes with Korean and Japanese treats, made with our sister florist Floral Charm. They stay beautiful for months.</p>
+        <div class="dates" data-rv><span>Order by 12 Dec 2026</span><span>Delivered 18 Jan – 3 Feb 2027</span></div>
+        <ul class="tiers" data-rv>
+          <li><span class="p"><small>From</small>S$38</span><b>Prosperity Posy</b><span>Soap-flower posy, CNY card, one premium snack · staff gifts</span></li>
+          <li class="pop"><span class="p"><small>From</small>S$68</span><b>Golden Blessings Box</b><span>Preserved-flower box, snack selection, card with your logo · clients</span></li>
+          <li><span class="p"><small>From</small>S$128</span><b>Grand Fortune Hamper</b><span>Large preserved and soap-flower piece, premium hamper · VIPs</span></li>
+        </ul>
+        <p class="fine" data-rv>Per gift, before delivery. Free logo card from 20 gifts. Many addresses? Send a spreadsheet and we deliver to each one.</p>
+        <div data-rv><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20a%20CNY%202027%20gift%20box%20quote.%20Number%20of%20gifts%3A%20" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Get a CNY quote</a></div>
+      </div>
+    </div>
+
+    <div class="svc">
+      <article data-rv>
+        <p class="k">Events</p>
+        <h3>The drinks table everyone ends up at.</h3>
+        <p>Drink stations or a staffed juice bar for townhalls, D&amp;Ds, launches and family days. We set up, pour and clear.</p>
+        <ul><li>Self-serve or staffed</li><li>Priced per headcount</li><li>Menu to your theme</li></ul>
+        <a class="btn light" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20plan%20event%20drinks.%20Date%3A%20%20Headcount%3A%20" target="_blank" rel="noopener">Plan event drinks</a>
+      </article>
+      <article data-rv>
+        <p class="k">Offices</p>
+        <h3>A pantry fridge your team will notice.</h3>
+        <p>A regular drop of fresh-canned fruit teas and juices, mixed to your team. Weekly or monthly, one invoice.</p>
+        <ul><li>Weekly or monthly</li><li>One invoice</li><li>PayNow or bank transfer</li></ul>
+        <a class="btn light" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20ask%20about%20office%20pantry%20drops." target="_blank" rel="noopener">Ask about pantry</a>
+      </article>
+    </div>
+    <ol class="how" aria-label="How event orders work">
+      <li data-rv><b>Tell us</b><span>Date, venue, headcount and the feel of the event.</span></li>
+      <li data-rv><b>Get a quote</b><span>Usually within 1 working day, with options for your budget.</span></li>
+      <li data-rv><b>Confirm</b><span>A 50% deposit locks your date.</span></li>
+      <li data-rv><b>We set up &amp; clear</b><span>We arrive early, pour all day and leave the space tidy.</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 5 · VISIT -->
+<section class="visit" id="visit" aria-labelledby="visit-h">
+  <div class="wrap">
+    <p class="eyebrow" data-rv>Visit us</p>
+    <h2 id="visit-h" data-rv>Come say hi in <em>Geylang Bahru.</em></h2>
+    <div class="v-wrap"><figure class="v-media" data-rv><img src="assets/s-shop.jpg" alt="The Born Juicy counter at 68 Geylang Bahru, with the menu screens and fridge" loading="lazy" decoding="async" style="object-position:50% 70%"><figcaption>Our shop, 68 Geylang Bahru</figcaption></figure>
+    <div class="vgrid" data-rv>
+      <div><span class="k">Where</span><span class="v"><a href="https://www.google.com/maps/search/?api=1&amp;query=Born%20Juicy%2068%20Geylang%20Bahru%20Singapore%20330068" target="_blank" rel="noopener">68 Geylang Bahru #01-3233</a></span><small>Singapore 330068</small></div>
+      <div><span class="k">Hours</span><span class="v">12:30pm – 10:30pm</span><small>Every day. Public holidays may vary.</small></div>
+      <div><span class="k">WhatsApp</span><span class="v">+65 9679 1309</span><small>Fastest for orders, gifts and events</small></div>
+      <div><span class="k">Delivery</span><span class="v">GrabFood</span><small>Search “Born Juicy - Geylang Bahru Ville”</small></div>
+    </div></div>
+    <div class="ctas" data-rv>
+      <a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order on WhatsApp</a>
+      <a class="btn on-dark" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg>Order on Grab</a>
+      <a class="btn light" href="https://www.google.com/maps/search/?api=1&amp;query=Born%20Juicy%2068%20Geylang%20Bahru%20Singapore%20330068" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg>Get directions</a>
+    </div>
+    <p class="family" data-rv>Part of the Born Juicy family on Geylang Bahru, with Floral Charm (flowers), Pompi Popzi Minimo (collectibles, right next door) and Chu Yii (snacks).</p>
+
+    <div class="faq">
+      <h3 data-rv>Good to know</h3>
+      <details data-rv><summary>Can I get Born Juicy delivered today?</summary><p>Yes. Order on GrabFood: search “Born Juicy - Geylang Bahru Ville”. For larger or scheduled orders, WhatsApp us at +65 9679 1309.</p></details>
+      <details data-rv><summary>How early should we order CNY gifts?</summary><p>Order by 12 December 2026 for delivery between 18 January and 3 February 2027. Slots are limited, so earlier is better, especially for 50 gifts or more.</p></details>
+      <details data-rv><summary>Can you put our logo on the gifts?</summary><p>Yes. Every box can carry a printed greeting card with your logo and message, free from 20 gifts.</p></details>
+      <details data-rv><summary>How do payment and invoicing work?</summary><p>You get one written quote. A 50% deposit confirms your order or event date, and the balance is due on delivery. We take PayNow and bank transfer and issue one invoice.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Born Juicy Pte Ltd · Singapore</span>
+    <span><a href="https://www.instagram.com/bornjuicysg/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.tiktok.com/@bornjuicysg" target="_blank" rel="noopener">TikTok</a> · contact@bornjuicy.sg</span>
+  </div>
+</footer>
+
+<div class="obar" id="obar">
+  <a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+  <a class="btn ink" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-bag"/></svg>Order on Grab</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script>
+/* ---------- always-on bits (no library needed) ---------- */
+(function(){
+  var y=document.getElementById('yr'); if(y) y.textContent=new Date().getFullYear();
+  /* open-now dot, Singapore time (UTC+8), hours 12:30–22:30 */
+  try{
+    var n=new Date(), m=((n.getUTCHours()+8)%24)*60+n.getUTCMinutes(), on=m>=750&&m<1350;
+    document.getElementById('live').classList.toggle('on',on);
+    document.getElementById('liveTxt').textContent=on?'Open now · till 10:30pm':(m<750?'Opens 12:30pm today':'Closed · opens 12:30pm');
+  }catch(e){}
+})();
+
+
+/* real product loops: play only while on screen; if the phone blocks autoplay (Low Power Mode) the poster stays */
+(function(){
+  var vids=[].slice.call(document.querySelectorAll('video[data-v]'));
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  vids.forEach(function(v){v.muted=true;v.setAttribute('muted','');v.playsInline=true;if(reduce){v.removeAttribute('autoplay');v.autoplay=false}});
+  if(reduce) return;
+  function play(v){var p=v.play();if(p&&p.catch)p.catch(function(){v.removeAttribute('autoplay')})}
+  if(!('IntersectionObserver' in window)){vids.forEach(play);return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){if(v.preload==='none')v.preload='auto';play(v)}else v.pause()})},{rootMargin:'200px 0px'});
+  vids.forEach(function(v){io.observe(v)});
+})();
+
+window.addEventListener('DOMContentLoaded',function(){
+  var q=location.search, flat=/flat/.test(q), shot=/shot/.test(q);
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hdr=document.getElementById('hdr'), root=document.documentElement;
+  function heroEnd(){var h=document.getElementById('top');return h.offsetTop+h.offsetHeight-innerHeight*.5}
+  function onScrollBasic(){var y=scrollY;hdr.classList.toggle('solid',y>10);root.classList.toggle('past-hero',y>innerHeight*.9)}
+  addEventListener('scroll',onScrollBasic,{passive:true});onScrollBasic();
+
+  if(flat||reduce||!window.gsap||!window.ScrollTrigger) return;   /* still page = finished page */
+  root.classList.add('mo');
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ignoreMobileResize:true});
+  var touch=matchMedia('(pointer: coarse)').matches;
+  var SCRUB=touch?0.6:true;   /* touch: short catch-up smoothing. desktop: Lenis already smooths */
+
+  /* Lenis smooth scroll: desktop mouse/trackpad only (iOS keeps native momentum) */
+  var lenis=null;
+  if(!touch&&!shot&&window.Lenis){
+    lenis=new Lenis({lerp:.1,wheelMultiplier:1,smoothWheel:true});
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(function(t){lenis.raf(t*1000)});
+    gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href');if(id.length<2)return;var t=document.querySelector(id);if(!t)return;e.preventDefault();lenis.scrollTo(id==='#top'?0:t,{offset:-parseInt(getComputedStyle(root).getPropertyValue('--hdr'))||0,duration:1.4})})});
+  }
+
+  /* header hides going down, returns going up */
+  ScrollTrigger.create({start:0,end:'max',onUpdate:function(s){hdr.classList.toggle('hide',s.direction===1&&s.scroll()>innerHeight*.6)}});
+
+  /* ---------- 1 · HERO ---------- */
+  var pin=document.getElementById('heroPin'), frame=document.getElementById('heroFrame');
+  var c2=pin.querySelector('.c2'), c3=pin.querySelector('.c3'), deals=pin.querySelectorAll('.deal');
+  var mm=gsap.matchMedia();
+  mm.add({d:'(min-width: 900px)',m:'(max-width: 899px)'},function(ctx){
+    var d=ctx.conditions.d;
+    gsap.set(c2,{xPercent:d?-24:-30,yPercent:4,rotation:-7});
+    gsap.set(c3,{xPercent:d?24:30,yPercent:7,rotation:6});
+    /* the real frame moves out of the stage and is laid out at its largest size; an empty twin keeps the slot */
+    var slot=frame.cloneNode(false); slot.removeAttribute('id'); slot.style.visibility='hidden'; slot.setAttribute('aria-hidden','true');
+    frame.parentNode.insertBefore(slot,frame); pin.appendChild(frame); frame.classList.add('big');
+    function off(el){var x=0,y=0;while(el&&el!==pin){x+=el.offsetLeft;y+=el.offsetTop;el=el.offsetParent}return{x:x,y:y}}
+    var T={};
+    function layout(){
+      var W=pin.clientWidth,H=pin.clientHeight,hd=hdr.offsetHeight;
+      var th=Math.min((H-hd)*(d?.70:.74),(W*.86)/0.8), tw=th*0.8;
+      var L=(W-tw)/2, Tp=hd+(H-hd-th)/2-(d?26:20);
+      gsap.set(frame,{width:tw,height:th,left:L,top:Tp});
+      var o=off(slot),w=slot.offsetWidth,h=slot.offsetHeight;
+      T={x:(o.x+w/2)-(L+tw/2), y:(o.y+h/2)-(Tp+th/2), s:w/tw};
+    }
+    layout();
+    gsap.set(frame,{x:T.x,y:T.y,scale:T.s});
+    gsap.from(deals,{y:90,autoAlpha:0,duration:1.4,ease:'expo.out',stagger:.12,delay:.15});
+    gsap.from(frame,{autoAlpha:0,duration:1.2,ease:'power2.out',delay:.4});
+    gsap.from('#heroCopy > *',{y:30,autoAlpha:0,duration:1.1,ease:'expo.out',stagger:.08,delay:.05});
+    var tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#top',start:'top top',end:'+='+(d?100:70)+'%',pin:'#top',scrub:SCRUB,anticipatePin:1,invalidateOnRefresh:true,onRefreshInit:function(){gsap.set(frame,{x:0,y:0,scale:1});layout()}}});
+    tl.to('#heroCopy',{y:-70,autoAlpha:0,duration:.45,ease:'power2.in'},0)
+      .to('#hint',{autoAlpha:0,duration:.15},0)
+      .to(c2,{xPercent:-150,yPercent:20,rotation:-22,autoAlpha:0,duration:.6,ease:'power2.in'},0.02)
+      .to(c3,{xPercent:150,yPercent:24,rotation:20,autoAlpha:0,duration:.6,ease:'power2.in'},0.02)
+      .fromTo(frame,{x:function(){return T.x},y:function(){return T.y},scale:function(){return T.s}},{x:0,y:0,scale:1,duration:1,ease:'power2.inOut'},0)
+      .to('#heroBd',{autoAlpha:1,duration:.7,ease:'power1.inOut'},.25)
+      .to('#heroCap',{autoAlpha:1,y:0,duration:.35},.8)
+      .to({},{duration:.25});
+    gsap.set('#heroCap',{y:16});
+    return function(){gsap.set(frame,{clearProps:'all'});frame.classList.remove('big');slot.parentNode.insertBefore(frame,slot);slot.remove()};
+  });
+
+  /* ---------- 2 · MADE FRESH ---------- */
+  var phs=gsap.utils.toArray('.m-ph'), lis=gsap.utils.toArray('#steps li'), cnt=document.getElementById('mCount');
+  mm.add({d:'(min-width: 900px)',m:'(max-width: 899px)'},function(ctx){
+    var d=ctx.conditions.d, dim=d?.22:0;
+    gsap.set(phs.slice(1),{clipPath:'inset(100% 0% 0% 0%)'});
+    gsap.set(lis.slice(1),{autoAlpha:dim,y:d?0:24});
+    gsap.set(lis[0],{autoAlpha:1});
+    var tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:'#madePin',start:'top top',end:'+=220%',pin:true,scrub:SCRUB,anticipatePin:1,
+      onUpdate:function(s){var i=Math.min(2,Math.floor(s.progress*2.999));cnt.textContent='0'+(i+1)+' / 03'}}});
+    tl.fromTo(phs[0].querySelector('img,video'),{yPercent:0},{yPercent:-4,duration:2.2},0);
+    [1,2].forEach(function(i){
+      var at=(i-1)*1+.4;
+      tl.to(phs[i],{clipPath:'inset(0% 0% 0% 0%)',duration:.6,ease:'power2.inOut'},at)
+        .fromTo(phs[i].querySelector('img,video'),{yPercent:6},{yPercent:0,duration:1.4,ease:'power1.out'},at)
+        .to(lis[i-1],{autoAlpha:dim,y:d?0:-24,duration:.3},at+.1)
+        .to(lis[i],{autoAlpha:1,y:0,duration:.3},at+.25);
+    });
+  });
+
+  /* ---------- 3 · MENU: stacking cards ---------- */
+  var cards=gsap.utils.toArray('.dcard');
+  cards.forEach(function(c,i){
+    var dc=c.querySelector('.dc');
+    c.querySelectorAll('.dc-ph img').forEach(function(img){
+      gsap.fromTo(img,{yPercent:-3},{yPercent:3,ease:'none',scrollTrigger:{trigger:c,start:'top bottom',end:'bottom top',scrub:SCRUB}});
+    });
+    var next=cards[i+1]; if(!next) return;
+    gsap.timeline({scrollTrigger:{trigger:next,start:'top bottom',end:'top '+(hdr.offsetHeight+10)+'px',scrub:SCRUB}})
+      .to(dc,{scale:.9,y:-14,ease:'none'},0)
+      .to(dc.querySelector('.veil'),{opacity:.32,ease:'none'},0);
+  });
+
+  /* ---------- 5 · GIFT photo opens like a window ---------- */
+  gsap.timeline({scrollTrigger:{trigger:'#gPh',start:'top 92%',end:'center 55%',scrub:SCRUB}})
+    .fromTo('#gPh',{clipPath:'inset(14% 10% 14% 10% round 28px)'},{clipPath:'inset(0% 0% 0% 0% round 28px)',ease:'power2.out'},0);
+
+  /* ---------- text reveals ---------- */
+  ScrollTrigger.batch('[data-rv]',{start:'top 88%',once:true,onEnter:function(els){gsap.to(els,{autoAlpha:1,y:0,duration:1,ease:'expo.out',stagger:.07,overwrite:true})}});
+
+  addEventListener('load',function(){ScrollTrigger.refresh()});
+  window.STORY={update:function(){ScrollTrigger.update()}};
+});
+</script>
+</body>
+</html>

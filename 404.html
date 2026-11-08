@@ -10,7 +10,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='36' r='22' fill='%23E8445A'/%3E%3Cpath d='M32 14c2-6 8-9 14-8-1 6-6 10-14 8z' fill='%2366A83A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500..600&family=Outfit:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/v-orange-bottle.jpg">
 <!--
   Born Juicy website v3 · photo-first scroll story.
@@ -23,7 +23,7 @@
 :root{
   --cream:#FBF5E6;--paper:#FFFDF8;--ink:#24213A;--ink-2:#4A4660;--muted:#6B6679;--line:rgba(36,33,58,.12);
   --melon:#E8445A;--melon-d:#C2283F;--mango:#FFB627;--lime:#7DBB3C;--wa:#1D8F4E;--wa-d:#157540;
-  --display:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Outfit",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;--script:"Caveat","Bradley Hand","Segoe Print",cursive;--wall:#D93349;--sans:"Outfit",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --pad:20px;--hdr:64px;--r:28px;--ease:cubic-bezier(.22,1,.36,1);
   color-scheme:light;
 }
@@ -260,6 +260,40 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-bet
 footer a{color:#fff}
 @media (max-width:899px){footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}}
 
+/* ---------- SIGNATURE WALL: one full-bleed colour moment ---------- */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wall{position:relative;overflow:clip;background:var(--wall);color:#FFF6EC;padding-block:clamp(84px,12vw,170px)}
+.wall-wm{position:relative;display:grid;font-family:var(--display);font-weight:700;font-size:clamp(100px,33vw,330px);line-height:.84;letter-spacing:-.045em}
+.wall-wm .l1{justify-self:start}
+.wall-wm .l2{justify-self:end;font-style:italic;font-weight:600}
+.wall-wm .scr{position:absolute;left:50%;top:50%;transform:translate(-50%,-52%) rotate(-8deg);font-family:var(--script);font-weight:700;font-size:.34em;letter-spacing:0;line-height:1;color:var(--mango);white-space:nowrap;text-shadow:0 2px 0 rgba(120,10,30,.25)}
+.wall-foot{display:grid;gap:14px;margin-top:clamp(40px,7vw,96px);max-width:36em}
+.wall-foot .big{font-size:clamp(20px,2.2vw,26px);font-weight:600;line-height:1.35}
+.wall-foot .sm{font-size:17px;font-weight:500;opacity:.95}
+.btn.cream{background:#FFF6EC;color:var(--melon-d);justify-self:start}
+.btn.cream:hover{background:#fff}
+@media (min-width:900px){.wall-foot{grid-template-columns:1fr auto;align-items:end;max-width:none;column-gap:48px}.wall-foot .btn{grid-column:2;grid-row:1 / span 2;align-self:end}}
+
+/* ---------- MENU CARDS TURN: tap the photo to see what's inside ---------- */
+.dc-ph.flip{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dc-ph .face{position:absolute;inset:0;overflow:hidden}
+.dc-ph .back{visibility:hidden;background:linear-gradient(rgba(25,12,0,.16),rgba(25,12,0,.16)) var(--deep);color:#fff;display:flex;flex-direction:column;justify-content:center;gap:clamp(10px,2vh,18px);padding:clamp(20px,4vw,46px) clamp(20px,4vw,44px) 70px}
+.dc-ph.on .back{visibility:visible}
+.dc-ph.on .front{visibility:hidden}
+.back .bk{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.92}
+.back .bn{font-family:var(--display);font-weight:600;font-size:clamp(24px,3.2vw,38px);line-height:1.05;text-wrap:balance}
+.back .ing{display:grid;gap:8px}
+.back .ing li{display:flex;align-items:center;gap:12px;font-size:clamp(16px,1.6vw,19px);font-weight:500}
+.back .ing li::before{content:"";width:20px;height:20px;border-radius:50%;flex:none;background:var(--d);box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.back .bp{font-family:var(--display);font-size:clamp(30px,3.6vw,44px);font-weight:600;line-height:1}
+.back .bp small{display:block;font-family:var(--sans);font-size:14px;font-weight:500;margin-top:6px;letter-spacing:.01em}
+.turn{position:absolute;left:14px;bottom:14px;z-index:3;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 15px;border:0;border-radius:999px;background:rgba(255,253,248,.94);color:var(--ink);font:600 14px/1 var(--sans);cursor:pointer;box-shadow:0 6px 18px -8px rgba(36,33,58,.5);transition:transform .35s var(--ease)}
+.turn:hover{transform:translateY(-2px)}
+.turn svg{width:16px;height:16px;fill:currentColor}
+.dc-copy .tag b{font-weight:700;color:var(--ink)}
+@media (min-width:900px){.turn{left:22px;bottom:22px}}
+@media (max-height:700px) and (max-width:899px){.back .ing{gap:5px}.back .ing li{font-size:15px}.back .ing li::before{width:16px;height:16px}.back .bn{font-size:22px}.back .bp{font-size:26px}}
+
 /* reveal (only when motion is on) */
 html.mo [data-rv]{opacity:0;transform:translateY(28px)}
 @media (prefers-reduced-motion:reduce){html.mo [data-rv]{opacity:1;transform:none}}
@@ -271,6 +305,7 @@ html.mo [data-rv]{opacity:0;transform:translateY(28px)}
   <symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></symbol>
   <symbol id="i-apple" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.2c-1.6-1.1-5.8-1.6-7.3 2.2-1.4 3.6.6 8.4 3.3 10.3 1.4 1 2.5.6 4 .2 1.5.4 2.6.8 4-.2 2.7-1.9 4.7-6.7 3.3-10.3-1.5-3.8-5.7-3.3-7.3-2.2z"/><path d="M12 7c0-2 .8-3.6 2.6-4.4"/></g></symbol>
   <symbol id="i-bag" viewBox="0 0 24 24"><path d="M7 7V6a5 5 0 0 1 10 0v1h3l-1 15H5L4 7h3zm2 0h6V6a3 3 0 0 0-6 0v1z"/></symbol>
+  <symbol id="i-turn" viewBox="0 0 24 24"><path d="M12 4V1L7.5 5.5 12 10V7a5 5 0 1 1-5 5H4.5A7.5 7.5 0 1 0 12 4.5z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></symbol>
 </svg>
 <a class="skip" href="#main">Skip to content</a>
@@ -309,7 +344,7 @@ html.mo [data-rv]{opacity:0;transform:translateY(28px)}
   </div>
 </section>
 
-<!-- 2 · MADE FRESH: three real photos wipe in, one per step -->
+<!-- 2 · MADE FRESH: three real loops wipe in, one per step -->
 <section class="made" id="made" aria-labelledby="made-h">
   <div class="made-pin wrap" id="madePin">
     <div class="made-media">
@@ -325,6 +360,18 @@ html.mo [data-rv]{opacity:0;transform:translateY(28px)}
         <li><span class="n">02</span><h3>Poured.</h3><p>Fruit teas infused with real fruit, steeped fresh.</p></li>
         <li><span class="n">03</span><h3>Canned.</h3><p>Sealed in our own clear cans, every day. You can see exactly what's inside.</p></li>
       </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 2b · SIGNATURE WALL: the colour does the shouting -->
+<section class="wall" id="taste" aria-labelledby="wall-h">
+  <div class="wrap">
+    <h2 class="wall-wm" id="wall-h"><span class="l1">Born</span><span class="scr" aria-hidden="true">always tasty</span><span class="l2">Juicy</span><span class="sr">, always tasty</span></h2>
+    <div class="wall-foot">
+      <p class="big" data-rv>Pressed, poured and canned on Geylang Bahru, every day.</p>
+      <p class="sm" data-rv>Drinks from S$4.40 at our counter.</p>
+      <a class="btn cream" href="#drinks" data-rv><svg class="i" aria-hidden="true"><use href="#i-turn"/></svg>Tap a drink to see inside</a>
     </div>
   </div>
 </section>
@@ -346,11 +393,11 @@ html.mo [data-rv]{opacity:0;transform:translateY(28px)}
       </nav>
     </header>
     <div class="stack" id="stack">
-      <article class="dcard" id="d-watermelon" style="--tint:#FFE4E7;--deep:#C2283F"><div class="dc"><figure class="dc-ph"><img src="assets/bj-watermelon.jpg" alt="Watermelon fruit tea in a clear Born Juicy can" loading="lazy" decoding="async"></figure><div class="dc-copy"><span class="idx">01 / 06</span><p class="tag">Fruit tea · can</p><h3>Watermelon</h3><p class="d">Chunks of fresh watermelon, steeped and sealed in the can. Our summer-every-day drink.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Watermelon%20fruit%20tea." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
-      <article class="dcard" id="d-longan" style="--tint:#FFF2D2;--deep:#9A6A12"><div class="dc"><figure class="dc-ph"><img src="assets/bj-longan.jpg" alt="Longan fruit tea in a clear Born Juicy can with fresh longans" loading="lazy" decoding="async"></figure><div class="dc-copy"><span class="idx">02 / 06</span><p class="tag">Fruit tea · can</p><h3>Longan</h3><p class="d">Whole longans in a light, golden tea. Served ice-cold.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Longan%20fruit%20tea." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
-      <article class="dcard" id="d-green" style="--tint:#ECF5DD;--deep:#3F7A1E"><div class="dc"><figure class="dc-ph"><img src="assets/bj-green-apple.jpg" alt="Green juice in a Born Juicy cup with celery, green apple and cucumber" loading="lazy" decoding="async"></figure><div class="dc-copy"><span class="idx">03 / 06</span><p class="tag">Cold-pressed</p><h3>Green apple, cucumber &amp; celery</h3><p class="d">Crisp, clean and properly green.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Green%20apple%2C%20cucumber%20%26%20celery%20juice." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
-      <article class="dcard" id="d-orange" style="--tint:#FFE7D3;--deep:#B5520A"><div class="dc"><figure class="dc-ph"><img src="assets/bj-orange-carrot.jpg" alt="Orange carrot juice in a Born Juicy cup with a whole orange, carrot and mint" loading="lazy" decoding="async"></figure><div class="dc-copy"><span class="idx">04 / 06</span><p class="tag">Cold-pressed</p><h3>Orange &amp; carrot</h3><p class="d">Sweet carrot, bright orange, a sprig of mint.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Orange%20%26%20carrot%20juice." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
-      <article class="dcard" id="d-pine" style="--tint:#FFF3C4;--deep:#A36A05"><div class="dc"><figure class="dc-ph"><img src="assets/bj-pineapple.jpg" alt="Pineapple carrot juice in a Born Juicy cup with a pineapple ring" loading="lazy" decoding="async"></figure><div class="dc-copy"><span class="idx">05 / 06</span><p class="tag">Cold-pressed</p><h3>Pineapple &amp; carrot</h3><p class="d">Tropical and tangy, with a little celery for balance.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Pineapple%20%26%20carrot%20juice." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
+      <article class="dcard" id="d-watermelon" style="--tint:#FFE4E7;--deep:#C2283F"><div class="dc"><figure class="dc-ph flip"><div class="face front"><img src="assets/bj-watermelon.jpg" alt="Watermelon fruit tea in a clear Born Juicy can" loading="lazy" decoding="async"></div><div class="face back" id="b-watermelon"><p class="bk">What's inside</p><p class="bn">Watermelon Chill</p><ul class="ing"><li style="--d:#E8445A">Fresh watermelon</li><li style="--d:#C98A3A">Tea, steeped with the fruit</li></ul><p class="bp">S$5.80<small>at our counter · Grab prices may differ</small></p></div><button class="turn" type="button" aria-controls="b-watermelon" aria-expanded="false"><svg aria-hidden="true"><use href="#i-turn"/></svg><span>What's inside</span></button></figure><div class="dc-copy"><span class="idx">01 / 06</span><p class="tag">Fruit tea · can · <b>S$5.80</b></p><h3>Watermelon</h3><p class="d">Chunks of fresh watermelon, steeped and sealed in the can. Our summer-every-day drink.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Watermelon%20fruit%20tea." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
+      <article class="dcard" id="d-longan" style="--tint:#FFF2D2;--deep:#9A6A12"><div class="dc"><figure class="dc-ph flip"><div class="face front"><img src="assets/bj-longan.jpg" alt="Longan fruit tea in a clear Born Juicy can with fresh longans" loading="lazy" decoding="async"></div><div class="face back" id="b-longan"><p class="bk">What's inside</p><p class="bn">Longan Bloom</p><ul class="ing"><li style="--d:#E9C98A">Whole longans</li><li style="--d:#C98A3A">Light golden tea</li></ul><p class="bp">S$5.80<small>at our counter · Grab prices may differ</small></p></div><button class="turn" type="button" aria-controls="b-longan" aria-expanded="false"><svg aria-hidden="true"><use href="#i-turn"/></svg><span>What's inside</span></button></figure><div class="dc-copy"><span class="idx">02 / 06</span><p class="tag">Fruit tea · can · <b>S$5.80</b></p><h3>Longan</h3><p class="d">Whole longans in a light, golden tea. Served ice-cold.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Longan%20fruit%20tea." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
+      <article class="dcard" id="d-green" style="--tint:#ECF5DD;--deep:#3F7A1E"><div class="dc"><figure class="dc-ph flip"><div class="face front"><img src="assets/bj-green-apple.jpg" alt="Green juice in a Born Juicy cup with celery, green apple and cucumber" loading="lazy" decoding="async"></div><div class="face back" id="b-green"><p class="bk">What's inside</p><p class="bn">Green Apple Celery Cooler</p><ul class="ing"><li style="--d:#8CC63F">Green apple</li><li style="--d:#3E7A35">Cucumber</li><li style="--d:#C5DC8C">Celery</li></ul><p class="bp">S$4.80<small>at our counter · Grab prices may differ</small></p></div><button class="turn" type="button" aria-controls="b-green" aria-expanded="false"><svg aria-hidden="true"><use href="#i-turn"/></svg><span>What's inside</span></button></figure><div class="dc-copy"><span class="idx">03 / 06</span><p class="tag">Cold-pressed · <b>S$4.80</b></p><h3>Green apple, cucumber &amp; celery</h3><p class="d">Crisp, clean and properly green.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Green%20apple%2C%20cucumber%20%26%20celery%20juice." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
+      <article class="dcard" id="d-orange" style="--tint:#FFE7D3;--deep:#B5520A"><div class="dc"><figure class="dc-ph flip"><div class="face front"><img src="assets/bj-orange-carrot.jpg" alt="Orange carrot juice in a Born Juicy cup with a whole orange, carrot and mint" loading="lazy" decoding="async"></div><div class="face back" id="b-orange"><p class="bk">What's inside</p><p class="bn">Orange Carrot Mint Zest</p><ul class="ing"><li style="--d:#F28C28">Orange</li><li style="--d:#E0601A">Carrot</li><li style="--d:#4FA36B">Mint</li></ul><p class="bp">S$4.40<small>at our counter · Grab prices may differ</small></p></div><button class="turn" type="button" aria-controls="b-orange" aria-expanded="false"><svg aria-hidden="true"><use href="#i-turn"/></svg><span>What's inside</span></button></figure><div class="dc-copy"><span class="idx">04 / 06</span><p class="tag">Cold-pressed · <b>S$4.40</b></p><h3>Orange &amp; carrot</h3><p class="d">Sweet carrot, bright orange, a sprig of mint.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Orange%20%26%20carrot%20juice." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
+      <article class="dcard" id="d-pine" style="--tint:#FFF3C4;--deep:#A36A05"><div class="dc"><figure class="dc-ph flip"><div class="face front"><img src="assets/bj-pineapple.jpg" alt="Pineapple carrot juice in a Born Juicy cup with a pineapple ring" loading="lazy" decoding="async"></div><div class="face back" id="b-pine"><p class="bk">What's inside</p><p class="bn">Pineapple Carrot Celery Medley</p><ul class="ing"><li style="--d:#F6CB34">Pineapple</li><li style="--d:#E0601A">Carrot</li><li style="--d:#C5DC8C">Celery</li></ul><p class="bp">S$4.40<small>at our counter · Grab prices may differ</small></p></div><button class="turn" type="button" aria-controls="b-pine" aria-expanded="false"><svg aria-hidden="true"><use href="#i-turn"/></svg><span>What's inside</span></button></figure><div class="dc-copy"><span class="idx">05 / 06</span><p class="tag">Cold-pressed · <b>S$4.40</b></p><h3>Pineapple &amp; carrot</h3><p class="d">Tropical and tangy, with a little celery for balance.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20I'd%20like%20to%20order%3A%20Pineapple%20%26%20carrot%20juice." target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Order this</a><a class="btn ghost" href="https://food.grab.com/sg/en/restaurant/born-juicy-geylang-bahru-ville-delivery/4-C7LGJYWCAEN1CE" target="_blank" rel="noopener">GrabFood</a></div><p class="note">On Grab, search “Born Juicy - Geylang Bahru Ville”.</p></div><span class="veil"></span></div></article>
       <article class="dcard" id="d-bites" style="--tint:#EFE8F6;--deep:#5E3F86"><div class="dc"><figure class="dc-ph duo"><div><img src="assets/bj-chia.jpg" alt="Chia pudding with fresh berries" loading="lazy" decoding="async"></div><div><img src="assets/bj-sando.jpg" alt="Fruit sandos with strawberry and kiwi" loading="lazy" decoding="async"></div></figure><div class="dc-copy"><span class="idx">06 / 06</span><p class="tag">Bites</p><h3>Chia puddings &amp; fruit sandos</h3><p class="d">Overnight chia with fresh fruit, and soft white bread with light cream and whole fresh fruit. Something to eat with your drink.</p><div class="row"><a class="btn wa" href="https://wa.me/6596791309?text=Hi%20Born%20Juicy!%20What%20bites%20do%20you%20have%20today%3F" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-wa"/></svg>Ask what's in today</a></div></div><span class="veil"></span></div></article>
     </div>
     <div class="stack-end"></div>
@@ -472,6 +519,24 @@ html.mo [data-rv]{opacity:0;transform:translateY(28px)}
   vids.forEach(function(v){io.observe(v)});
 })();
 
+/* menu cards turn on tap (works with or without the animation library) */
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  [].forEach.call(document.querySelectorAll('.dc-ph.flip'),function(fig){
+    var btn=fig.querySelector('.turn'), lbl=btn.querySelector('span'), busy=false;
+    function set(on){fig.classList.toggle('on',on);btn.setAttribute('aria-expanded',on?'true':'false');lbl.textContent=on?'Show photo':"What's inside"}
+    fig.addEventListener('click',function(e){
+      if(busy) return; var on=!fig.classList.contains('on');
+      if(!window.gsap||reduce||!document.documentElement.classList.contains('mo')){set(on);return}
+      busy=true;
+      gsap.timeline({onComplete:function(){busy=false;gsap.set(fig,{clearProps:'transform'})}})
+        .to(fig,{rotationY:on?90:-90,transformPerspective:1600,duration:.24,ease:'power2.in'})
+        .add(function(){set(on)})
+        .fromTo(fig,{rotationY:on?-90:90},{rotationY:0,transformPerspective:1600,duration:.5,ease:'power3.out'});
+    });
+  });
+})();
+
 window.addEventListener('DOMContentLoaded',function(){
   var q=location.search, flat=/flat/.test(q), shot=/shot/.test(q);
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -557,6 +622,14 @@ window.addEventListener('DOMContentLoaded',function(){
         .to(lis[i],{autoAlpha:1,y:0,duration:.3},at+.25);
     });
   });
+
+  /* ---------- 2b · SIGNATURE WALL: the words drift apart as you pass, the script writes itself in ---------- */
+  gsap.fromTo('.wall-wm .l1',{xPercent:-4},{xPercent:3,ease:'none',scrollTrigger:{trigger:'#taste',start:'top bottom',end:'bottom top',scrub:SCRUB}});
+  gsap.fromTo('.wall-wm .l2',{xPercent:4},{xPercent:-3,ease:'none',scrollTrigger:{trigger:'#taste',start:'top bottom',end:'bottom top',scrub:SCRUB}});
+  gsap.fromTo('.wall-wm .scr',{clipPath:'inset(-20% 100% -20% 0%)'},{clipPath:'inset(-20% 0% -20% 0%)',duration:1.2,ease:'power2.inOut',scrollTrigger:{trigger:'#taste',start:'top 55%',toggleActions:'play none none none'}});
+  /* the first drink card gives a small turn once, so people know it turns */
+  var f1=document.querySelector('.dc-ph.flip');
+  if(f1) ScrollTrigger.create({trigger:f1,start:'top 60%',once:true,onEnter:function(){gsap.fromTo(f1,{rotationY:0},{rotationY:-12,transformPerspective:1600,duration:.45,ease:'sine.inOut',yoyo:true,repeat:1,delay:.4,onComplete:function(){gsap.set(f1,{clearProps:'transform'})}})}});
 
   /* ---------- 3 · MENU: stacking cards ---------- */
   var cards=gsap.utils.toArray('.dcard');
